@@ -24,7 +24,8 @@
             <button class="navbar-toggler mr-2" type="button" data-toggle="collapse" data-target="#Navbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a href="./index.html" class="navbar-brand mr-3"><img src="./img/logo.png" height="30" width="41" alt=""></a>
+            <a href="./index.html" class="navbar-brand mr-3"><img src="./img/logo.png" height="30" width="41"
+                    alt=""></a>
             <div class="collapse navbar-collapse" id="Navbar">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item"><a class="nav-link " href="./index.html"><span class="fa fa-home"></span>
@@ -47,6 +48,7 @@
             <div class="row row-header">
                 <div class="col-12 col-sm-6">
                     <h1>Ristorante con Fusion</h1>
+
                     <p>We take inspiration from the World's best cuisines, and create a unique fusion experience. Our
                         lipsmacking creations will tickle your culinary senses!</p>
                 </div>
@@ -104,7 +106,7 @@
                             I'm not hungry enough to eat six.</p>
                         <footer class="blockquote-footer">Yogi Berra,
                             <cite title="Source Title">The Wit and Wisdom of Yogi Berra,
-                            P. Pepe, Diversion Books, 2014</cite>
+                                P. Pepe, Diversion Books, 2014</cite>
                         </footer>
                     </blockquote>
                 </div>
@@ -116,34 +118,68 @@
             <!-- <div class="col col-12 col-sm-12 col-lg-12 col-xl-12"> -->
             <div class="col">
                 <h2>Corporate Leadership</h2>
-                <h3>Peter Pan <small>Chief Epicurious Officer</small></h3>
-                <p class="d-none d-md-block">Our CEO, Peter, credits his hardworking East Asian immigrant parents who
-                    undertook the arduous
-                    journey to the shores of America with the intention of giving their children the best future. His
-                    mother's wizardy in the kitchen whipping up the tastiest dishes with whatever is available
-                    inexpensively at the supermarket, was his first inspiration to create the fusion cuisines for which
-                    <em>The Frying Pan</em> became well known. He brings his zeal for fusion cuisines to this
-                    restaurant, pioneering cross-cultural culinary connections.
-                </p>
-                <h3>Dhanasekaran Witherspoon <small>Chief Food Officer</small></h3>
-                <p class="d-none d-md-block">Our CFO, Danny, as he is affectionately referred to by his colleagues,
-                    comes from a long established
-                    family tradition in farming and produce. His experiences growing up on a farm in the Australian
-                    outback gave him great appreciation for varieties of food sources. As he puts it in his own words,
-                    <em>Everything that runs, wins, and everything that stays, pays!</em>
-                </p>
-                <h3>Agumbe Tang <small>Chief Taste Officer</small></h3>
-                <p class="d-none d-md-block">Blessed with the most discerning gustatory sense, Agumbe, our CTO,
-                    personally ensures that every dish
-                    that we serve meets his exacting tastes. Our chefs dread the tongue lashing that ensues if their
-                    dish does not meet his exacting standards. He lives by his motto, <em>You click only if you survive
-                        my lick.</em></p>
-                <h3>Alberto Somayya <small>Executive Chef</small></h3>
-                <p class="d-none d-md-block">Award winning three-star Michelin chef with wide International experience
-                    having worked closely with
-                    whos-who in the culinary world, he specializes in creating mouthwatering Indo-Italian fusion
-                    experiences. He says, <em>Put together the cuisines from the two craziest cultures, and you get a
-                        winning hit! Amma Mia!</em></p>
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link active" id="peter-tab" data-toggle="tab" href="#peter" role="tab" aria-controls="peter" aria-selected="true">Peter Pan, CEO</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link" id="danny-tab" data-toggle="tab" href="#danny" role="tab" aria-controls="danny" aria-selected="false">Danny Whiterspoon, CFO</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link" id="agumbe-tab" data-toggle="tab" href="#agumbe" role="tab" aria-controls="agumbe" aria-selected="false">Agumbe Tang, CTO</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link" id="alberto-tab" data-toggle="tab" href="#alberto" role="tab" aria-controls="alberto" aria-selected="false">Albeto Somayya, Exec. Chef</a>
+                    </li>
+                  </ul>
+                  <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="peter" role="tabpanel" aria-labelledby="peter-tab">
+                        <h3>Peter Pan <small>Chief Epicurious Officer</small></h3>
+                        <p class="d-none d-md-block">Our CEO, Peter, credits his hardworking East Asian immigrant
+                            parents who
+                            undertook the arduous
+                            journey to the shores of America with the intention of giving their children the best
+                            future. His
+                            mother's wizardy in the kitchen whipping up the tastiest dishes with whatever is available
+                            inexpensively at the supermarket, was his first inspiration to create the fusion cuisines
+                            for which
+                            <em>The Frying Pan</em> became well known. He brings his zeal for fusion cuisines to this
+                            restaurant, pioneering cross-cultural culinary connections.
+                        </p> 
+                    </div>
+                    <div class="tab-pane fade" id="danny" role="tabpanel" aria-labelledby="danny-tab">
+                        <h3>Dhanasekaran Witherspoon <small>Chief Food Officer</small></h3>
+                        <p class="d-none d-md-block">Our CFO, Danny, as he is affectionately referred to by his
+                            colleagues,
+                            comes from a long established
+                            family tradition in farming and produce. His experiences growing up on a farm in the
+                            Australian
+                            outback gave him great appreciation for varieties of food sources. As he puts it in his own
+                            words,
+                            <em>Everything that runs, wins, and everything that stays, pays!</em>
+                        </p>
+                    </div>
+                    <div class="tab-pane fade" id="agumbe" role="tabpanel" aria-labelledby="agumbe-tab">
+                        <h3>Agumbe Tang <small>Chief Taste Officer</small></h3>
+                        <p class="d-none d-md-block">Blessed with the most discerning gustatory sense, Agumbe, our CTO,
+                            personally ensures that every dish
+                            that we serve meets his exacting tastes. Our chefs dread the tongue lashing that ensues if
+                            their
+                            dish does not meet his exacting standards. He lives by his motto, <em>You click only if you
+                                survive
+                                my lick.</em></p>
+                    </div>
+                    <div class="tab-pane fade" id="alberto" role="tabpanel" aria-labelledby="alberto-tab">
+                        <h3>Alberto Somayya <small>Executive Chef</small></h3>
+                        <p class="d-none d-md-block">Award winning three-star Michelin chef with wide International
+                            experience
+                            having worked closely with
+                            whos-who in the culinary world, he specializes in creating mouthwatering Indo-Italian fusion
+                            experiences. He says, <em>Put together the cuisines from the two craziest cultures, and you
+                                get a
+                                winning hit! Amma Mia!</em></p>
+                    </div>
+                  </div>
             </div>
         </div>
         <div class="row row-content">

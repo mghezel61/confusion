@@ -54,14 +54,13 @@
                 <div class="col-12 col-sm align-self-center">
                     <img src="./img/logo.png" class="img-fluid" alt="Ristorante con Fusion">
                 </div>
-            </div>
+                <div class="col-12 col-sm-3 align-self-center">
+                    <a href="#reserveTable" class="btn btn-warning btn-sm btn-block" type="button">Reserve Table</a>
+                </div>
         </div>
     </header>
 
     <div class="container">
-        <ol class="breadcrumb col-12 mt-1">
-            <li class="breadcrumb-item active" aria-current="page">Home</li>
-        </ol>
         <div class="row row-content align-items-center">
             <div class="col-12 col-sm-4 col-md-3 order-sm-last">
                 <h3>Our Lipsmacking Culinary Creations</h3>
@@ -71,8 +70,10 @@
                     <img src="./img/uthappizza.png" class="d-flex mr-3 img-thumbnail align-self-center"
                         alt="Uthappizza">
                     <div class="media-body">
-                        <h2 class="mt-0">Uthappizza <span class="badge badge-danger">Hot</span> <span class="badge badge-pill badge-secondary">$4.99</span></h2>
-                        <p>A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola
+                        <h2 class="mt-0">Uthappizza<br class="d-sm-none d-block"> <span class="badge badge-danger">Hot</span><br class="d-sm-none d-block"> <span
+                                class="badge badge-pill badge-secondary">$4.99</span></h2>
+                        <p class="d-none d-sm-block">A unique combination of Indian Uthappam (pancake) and Italian
+                            pizza, topped with Cerignola
                             olives,
                             ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.</p>
                     </div>
@@ -80,23 +81,27 @@
             </div>
         </div>
         <div class="row row-content align-items-center">
-            <div class="col-12 col-sm-4 col-md-3">
+            <div class="col-12 col-sm-3 col-md-3">
                 <h3>This Month's Promotions</h3>
             </div>
             <div class="col col-sm col-md">
-                <h2>Weekend Grand Buffet</h2>
-                <p>Featuring mouthwatering combinations with a choice of five different salads, six enticing appetizers,
-                    six main entrees and five choicest desserts. Free flowing bubbly and soft drinks. All for just
-                    $19.99 per person </p>
+                <div class="media">
+                    <div class="media-body">
+                        <h2 class="mt-0">Weekend Grand Buffet <span class="badge badge-danger">NEW</span></h2>
+                        <p class="d-none d-sm-block">Featuring mouthwatering combinations with a choice of five different salads,<br>
+                             six enticing appetizers,six main entrees and five choicest desserts. Free <br> flowing bubbly and soft drinks. All for
+                            just
+                            $19.99 per person </p>
+
+                    </div>
+                    <img src="./img/buffet.png" class="d-flex ml-3 img-thumbnail align-self-center" alt="Buffet">
+                </div>
             </div>
         </div>
 
         <div class="row row-content align-items-center">
-            <div class="col col-sm-6">
+            <div class="col-12 col-sm-4 order-sm-last col-md-3">
                 <h3>Meet our Culinary Specialists</h3>
-                <p>Award winning three-star Michelin chef with wide International experience having worked closely with
-                    whos-who in the culinary world, he specializes in creating mouthwatering Indo-Italian fusion
-                    experiences. </p>
             </div>
             <div class="col col-sm col-md order-sm-first">
                 <div class="media">
@@ -105,7 +110,8 @@
                     <div class="media-body">
                         <h2 class="mt-0">Alberto Somayya</h2>
                         <h4>Executive Chef</h4>
-                        <p>Award winning three-star Michelin chef with wide International experience having worked closely with
+                        <p class="d-none d-sm-block">Award winning three-star Michelin chef with wide International experience having worked
+                            closely with
                             whos-who in the culinary world, he specializes in creating mouthwatering Indo-Italian fusion
                             experiences. </p>
 
@@ -113,6 +119,76 @@
                 </div>
             </div>
         </div>
+
+        <div class=" col col-sm-8 offset-sm-2 my-4" id="reserveTable">
+            <form class="card align-self-center justify-content-center">
+                <h3 class="bg-warning card-header text-white py-2">Reserve a Tabel</h3>
+                <div class="card-body">
+                    <div class="row form-group">
+                        <label for="numberOfGuests" class="col-md-3 col-form-label"> Number of Geusts
+                        </label>
+                        <div class="col-md-9">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="numOfGuests" id="oneGuest"
+                                    value="option1">
+                                <label class="form-check-label" for="oneGuest">1</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="numOfGuests" id="twoGuests"
+                                    value="option2">
+                                <label class="form-check-label" for="twoGuests">2</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="numOfGuests" id="ThreeGuests"
+                                    value="option3">
+                                <label class="form-check-label" for="ThreeGuests">3</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="numOfGuests" id="fourGuests"
+                                    value="option2">
+                                <label class="form-check-label" for="fourGuests">4</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="numOfGuests" id="fiveGuests"
+                                    value="option3">
+                                <label class="form-check-label" for="fiveGuests">5</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="numOfGuests" id="sixGuests"
+                                    value="option3">
+                                <label class="form-check-label" for="sixGuests">6</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label for="dateAndTime" class="col-md-3 col-form-label"> Number of Geusts
+                        </label>
+                        <div class="col-md-9">
+                            <div class="row form-group">
+                                <div class="col-12 mb-2 col-sm-5">
+                                    <input class="form-control" type="text" name="numOfGuests" id="oneGuest"
+                                        value="" placeholder="Date">
+                                    <!-- <label class="form-check-label" for="oneGuest">1</label> -->
+                                </div>
+                                <div class="col-12 col-sm-5">
+                                    <input class="form-control" type="text" name="numOfGuests" id="twoGuests"
+                                        value="" placeholder="Time">
+                                    <!-- <label class="form-check-label" for="twoGuests">2</label> -->
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="offset-md-3 col-md-9">
+                            <button type="submit" class="btn btn-primary">Reserve</button>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+
     </div>
 
     <footer class="footer">
