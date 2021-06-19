@@ -43,3 +43,7 @@ body {
     border-bottom: 1px solid #ddd;
     padding:10px;
 }
+
+.card {
+    /* margin-top: 5px; */
+}
