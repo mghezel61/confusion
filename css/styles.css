@@ -44,6 +44,6 @@ body {
     padding:10px;
 }
 
-.card {
-    /* margin-top: 5px; */
+.navbar-text {
+    cursor: pointer;
 }
