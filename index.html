@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="node_modules/bootstrap-social/bootstrap-social.css" />
     <!-- Custom CSS stylesheet -->
     <link rel="stylesheet" href="css/styles.css" />
+    <!-- <link rel="stylesheet" href="css/styles-old.css" /> -->
     <title>Ristorante Con Fusion</title>
 </head>
 
@@ -224,7 +225,7 @@
     <!-- Main body -->
     <div class="container">
         <div class="row row-content">
-            <div class="col">
+            <div class="col pt-3">
                 <div id="mycarousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner" role="listbox">
                         <div class="carousel-item active">
@@ -418,7 +419,7 @@
         $(document).ready(function () {
             //   setting interval the carousel
             $(".carousel").carousel({
-                interval: 1000,
+                interval: 2000,
             });
             // invoking the pause and play buttons
             $("#carouselButton").on("click", function () {
