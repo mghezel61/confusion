@@ -54,6 +54,26 @@ body{
     padding: 10px;
 }
 
+// login 
+a#modalLoginBtn {
+    cursor: pointer;
+} 
+
+// Modals
+.modal-dialog {
+    .modal-content{
+        .modal-header{
+            background-color: $background-dark;
+            color: $lt-gray;
+            button {
+                color: $background-pale;
+            }
+        }
+        .modal-body{
+            background-color: $background-pale;
+        }
+    }
+}
 // carousel
 .carousel {
     background:$background-dark;
