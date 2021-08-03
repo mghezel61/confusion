@@ -1,7 +1,5 @@
 import React from "react";
-import { useState } from "react";
 import { Card, CardTitle, CardImg, CardImgOverlay } from "reactstrap";
-import DishDetail from "./DishDetail";
 
 const Menu = ({ dishes, setSelectedDish }) => {
   //   Menu component

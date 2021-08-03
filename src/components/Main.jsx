@@ -1,6 +1,5 @@
 import { Navbar, NavbarBrand } from "reactstrap";
 import Menu from "./Menu";
-
 import { useState } from "react";
 import { DISHES } from "../shared/dishes";
 import DishDetail from "./DishDetail";
@@ -8,7 +7,6 @@ import DishDetail from "./DishDetail";
 const Main = () => {
   const [selectedDish, setSelectedDish] = useState(null);
 
-  const [dishes, setDishes] = useState(DISHES);
   return (
     <div>
       <Navbar dark color="primary">
@@ -17,7 +15,7 @@ const Main = () => {
         </div>
       </Navbar>
       <div className="container">
-        <Menu dishes={dishes} setSelectedDish={setSelectedDish} />
+        <Menu dishes={DISHES} setSelectedDish={setSelectedDish} />
         <DishDetail dish={selectedDish} setSelectedDish={setSelectedDish} />
       </div>
     </div>
