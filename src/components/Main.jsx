@@ -1,24 +1,22 @@
-import { Navbar, NavbarBrand } from "reactstrap";
 import Menu from "./Menu";
 import { useState } from "react";
 import { DISHES } from "../shared/dishes";
 import DishDetail from "./DishDetail";
+import Header from "./Header";
+import Footer from "./Footer";
 
 const Main = () => {
   const [selectedDish, setSelectedDish] = useState(null);
 
   return (
-    <div>
-      <Navbar dark color="primary">
-        <div className="container">
-          <NavbarBrand href="/">Restaurant Confusion</NavbarBrand>
-        </div>
-      </Navbar>
+    <>
+      <Header />
       <div className="container">
         <Menu dishes={DISHES} setSelectedDish={setSelectedDish} />
         <DishDetail dish={selectedDish} setSelectedDish={setSelectedDish} />
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 
