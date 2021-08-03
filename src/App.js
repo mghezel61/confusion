@@ -1,22 +1,12 @@
-import "./App.css";
-import { Navbar, NavbarBrand } from "reactstrap";
-import Menu from "./components/Menu";
+import React from "react";
+import Main from "./components/Main";
 
-import { useState } from "react";
-import { DISHES } from "./shared/dishes";
-
-function App() {
-  const [dishes, setDishes] = useState(DISHES);
+const App = () => {
   return (
     <div>
-      <Navbar dark color="primary">
-        <div className="container">
-          <NavbarBrand href="/">Restaurant Confusion</NavbarBrand>
-        </div>
-      </Navbar>
-      <Menu dishes={dishes} />
+      <Main />
     </div>
   );
-}
+};
 
 export default App;
