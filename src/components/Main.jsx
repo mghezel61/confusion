@@ -4,16 +4,25 @@ import { DISHES } from "../shared/dishes";
 import DishDetail from "./DishDetail";
 import Header from "./Header";
 import Footer from "./Footer";
+import { Route, Redirect, Switch } from "react-router-dom";
+import Home from "./Home";
 
 const Main = () => {
-  const [selectedDish, setSelectedDish] = useState(null);
-
+  const [dishes, setDishes] = useState(DISHES);
+  const HomePage = () => <Home />;
   return (
     <>
       <Header />
       <div className="container">
-        <Menu dishes={DISHES} setSelectedDish={setSelectedDish} />
-        <DishDetail dish={selectedDish} setSelectedDish={setSelectedDish} />
+        <Switch>
+          <Route path="/home" component={HomePage} />
+          <Route
+            exact
+            path="/menu"
+            component={() => <Menu dishes={dishes} />}
+          />
+          <Redirect to="/home" />
+        </Switch>
       </div>
       <Footer />
     </>

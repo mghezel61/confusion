@@ -32,3 +32,11 @@ address {
 .navbar-dark {
   background-color: #512da8;
 }
+
+.nav-link {
+  display: flex;
+  align-items: center;
+}
+.nav-link span {
+  display: inline-block;
+}
