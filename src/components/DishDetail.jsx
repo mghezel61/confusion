@@ -1,7 +1,8 @@
 import React from "react";
 import { Card, CardBody, CardTitle, CardImg, CardText } from "reactstrap";
+import { Link } from "react-router-dom";
 
-const DishDetail = ({ dish, setSelectedDish }) => {
+const DishDetail = ({ dish }) => {
   // render comments
   const RenderComments = ({ comments }) => (
     <div className="col-12 col-md-5 m-1">
@@ -26,7 +27,7 @@ const DishDetail = ({ dish, setSelectedDish }) => {
     return (
       <>
         <div className=" col-12 col-md-5 m-1">
-          <Card onClick={() => setSelectedDish(null)}>
+          <Card>
             <CardImg width="100%" src={dish.image} alt={dish.name} />
             <CardBody>
               <CardTitle>{dish.name}</CardTitle>

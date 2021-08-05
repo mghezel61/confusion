@@ -9,6 +9,7 @@ import Footer from "./Footer";
 import { Route, Redirect, Switch } from "react-router-dom";
 import Home from "./Home";
 import Contact from "./Contact";
+import DishDetail from "./DishDetail";
 
 const Main = () => {
   const [state, setState] = useState({
@@ -24,6 +25,19 @@ const Main = () => {
       leader={state.leaders.filter((leader) => leader.featured)[0]}
     />
   );
+
+  const DishWithId = ({ match: { params } }) => {
+    const id = +params.dishId;
+    const comments = state.comments.filter((comment) => comment.dishId === id);
+    console.log(comments);
+    return (
+      <DishDetail
+        dish={state.dishes.filter((dish) => dish.id === id)[0]}
+        comments={comments}
+      />
+    );
+  };
+
   return (
     <>
       <Header />
@@ -34,6 +48,23 @@ const Main = () => {
             exact
             path="/menu"
             component={() => <Menu dishes={state.dishes} />}
+          />
+          <Route
+            exact
+            path="/menu/:dishId"
+            render={({ match: { params } }) => {
+              const id = +params.dishId;
+              const comments = state.comments.filter(
+                (comment) => comment.dishId === id
+              );
+              console.log(comments);
+              return (
+                <DishDetail
+                  dish={state.dishes.filter((dish) => dish.id === id)[0]}
+                  comments={comments}
+                />
+              );
+            }}
           />
           <Route exact path="/contactus" component={Contact} />
           <Redirect to="/home" />
