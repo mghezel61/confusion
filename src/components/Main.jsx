@@ -10,6 +10,7 @@ import { Route, Redirect, Switch } from "react-router-dom";
 import Home from "./Home";
 import Contact from "./Contact";
 import DishDetail from "./DishDetail";
+import About from "./About";
 
 const Main = () => {
   const [state, setState] = useState({
@@ -46,6 +47,11 @@ const Main = () => {
       <div className="container">
         <Switch>
           <Route path="/home" component={HomePage} />
+          <Route
+            exact
+            path="/aboutus"
+            component={() => <About leaders={state.leaders} />}
+          />
           <Route
             exact
             path="/menu"

@@ -5,7 +5,6 @@ import {
   AiFillLinkedin,
   AiFillTwitterSquare,
   AiFillYoutube,
-  AiFillRedEnvelope,
 } from "react-icons/ai";
 
 import { BsFillEnvelopeFill } from "react-icons/bs";
