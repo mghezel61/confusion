@@ -27,17 +27,19 @@ const Main = () => {
   );
 
   const DishWithId = ({ match: { params } }) => {
-    const id = +params.dishId;
-    const comments = state.comments.filter((comment) => comment.dishId === id);
-    console.log(comments);
-    return (
-      <DishDetail
-        dish={state.dishes.filter((dish) => dish.id === id)[0]}
-        comments={comments}
-      />
-    );
-  };
+    const dishId = +params.dishId;
 
+    if (dishId !== undefined) {
+      return (
+        <DishDetail
+          dish={state.dishes.filter((dish) => dish.id === dishId)[0]}
+          comments={state.comments.filter(
+            (comment) => comment.dishId === dishId
+          )}
+        />
+      );
+    }
+  };
   return (
     <>
       <Header />
@@ -49,23 +51,7 @@ const Main = () => {
             path="/menu"
             component={() => <Menu dishes={state.dishes} />}
           />
-          <Route
-            exact
-            path="/menu/:dishId"
-            render={({ match: { params } }) => {
-              const id = +params.dishId;
-              const comments = state.comments.filter(
-                (comment) => comment.dishId === id
-              );
-              console.log(comments);
-              return (
-                <DishDetail
-                  dish={state.dishes.filter((dish) => dish.id === id)[0]}
-                  comments={comments}
-                />
-              );
-            }}
-          />
+          <Route exact path="/menu/:dishId" component={DishWithId} />
           <Route exact path="/contactus" component={Contact} />
           <Redirect to="/home" />
         </Switch>

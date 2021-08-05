@@ -1,8 +1,16 @@
 import React from "react";
-import { Card, CardBody, CardTitle, CardImg, CardText } from "reactstrap";
+import {
+  Card,
+  CardBody,
+  CardTitle,
+  CardImg,
+  CardText,
+  Breadcrumb,
+  BreadcrumbItem,
+} from "reactstrap";
 import { Link } from "react-router-dom";
 
-const DishDetail = ({ dish }) => {
+const DishDetail = ({ dish, comments }) => {
   // render comments
   const RenderComments = ({ comments }) => (
     <div className="col-12 col-md-5 m-1">
@@ -26,7 +34,7 @@ const DishDetail = ({ dish }) => {
   const RenderDish = ({ dish }) => {
     return (
       <>
-        <div className=" col-12 col-md-5 m-1">
+        <div className=" col-12 col-md-6 mb-3">
           <Card>
             <CardImg width="100%" src={dish.image} alt={dish.name} />
             <CardBody>
@@ -41,9 +49,21 @@ const DishDetail = ({ dish }) => {
   // Render the the dish details
   if (dish !== null) {
     return (
-      <div className="row">
-        <RenderDish dish={dish} />
-        <RenderComments comments={dish.comments} />
+      <div className="container">
+        <div className="row">
+          <Breadcrumb>
+            <BreadcrumbItem>
+              <Link to="/menu">Menu</Link>
+            </BreadcrumbItem>
+            <BreadcrumbItem active>{dish.name}</BreadcrumbItem>
+          </Breadcrumb>
+        </div>
+        <h3>{dish.name}</h3>
+        <hr />
+        <div className="row">
+          <RenderDish dish={dish} />
+          <RenderComments comments={comments} />
+        </div>
       </div>
     );
   } else {
