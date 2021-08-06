@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Breadcrumb,
   BreadcrumbItem,
   Form,
   FormGroup,
+  FormFeedback,
   Label,
   Input,
   Col,
@@ -19,6 +20,13 @@ function Contact(props) {
     agree: false,
     contactType: "Tel.",
     message: "",
+  });
+
+  const [errors, setErrors] = useState({
+    firstName: "",
+    lastName: "",
+    telNo: "",
+    email: "",
   });
 
   // Handle the form changes
@@ -53,10 +61,77 @@ function Contact(props) {
     }
   };
 
+  // const onBlurValidation1 = (field) => (e) => {
+  //   console.log("field", field);
+  //   console.log("name", e.target.name);
+  //   console.log("value", e.target.value);
+  //   console.log("type", e.target.type);
+  // };
+
+  // Validation
+  const onBlurValidation = (e) => {
+    const name = e.target.name;
+    const telReg = /^\d+$/;
+    const emailReg =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    switch (name) {
+      case "firstName":
+        console.log("Length", state.firstName.length);
+        setErrors({ ...errors, firstName: "" });
+        if (state.firstName && state.firstName.length < 3) {
+          setErrors({
+            ...errors,
+            firstName: "First name should be >= 3 character",
+          });
+        } else if (state.firstName && state.firstName.length > 20) {
+          setErrors({
+            ...errors,
+            firstName: "First name should be <= 20 character",
+          });
+        }
+        break;
+      case "lastName":
+        setErrors({ ...errors, lastName: "" });
+        if (state.lastName && state.lastName.length < 3) {
+          setErrors({
+            ...errors,
+            lastName: "First name should be >= 3 character",
+          });
+        } else if (state.lastName && state.lastName.length > 20) {
+          setErrors({
+            ...errors,
+            lastName: "Last name should be <= 20 character",
+          });
+        }
+
+        break;
+      case "telNo":
+        setErrors({ ...errors, telNo: "" });
+        if (state.telNo && !telReg.test(state.telNo)) {
+          setErrors({
+            ...errors,
+            telNo: "Tel. Number should contain only numbers",
+          });
+        }
+        break;
+      case "email":
+        setErrors({ ...errors, email: "" });
+        if (state.email && !emailReg.test(state.email)) {
+          setErrors({
+            ...errors,
+            email: "Please enter a valid email address!",
+          });
+        }
+        break;
+      default:
+        break;
+    }
+  };
+
   // form handler
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    console.log(JSON.stringify(state));
     alert(JSON.stringify(state));
     setState({
       firstName: "",
@@ -68,6 +143,7 @@ function Contact(props) {
       message: "",
     });
   };
+
   return (
     <div className="container">
       <div className="row">
@@ -139,12 +215,16 @@ function Contact(props) {
               <Col md={10}>
                 <Input
                   type="text"
+                  valid={!errors.firstName && state.firstName.length > 0}
+                  invalid={errors.firstName}
                   id="firstName"
                   name="firstName"
                   placeholder="First Name"
                   value={state.firstName}
                   onChange={onChangeHandler}
+                  onBlur={onBlurValidation}
                 />
+                <FormFeedback>{errors.firstName}</FormFeedback>
               </Col>
             </FormGroup>
             <FormGroup row>
@@ -155,11 +235,15 @@ function Contact(props) {
                 <Input
                   type="text"
                   id="lastName"
+                  valid={!errors.lastName && state.lastName.length > 0}
+                  invalid={errors.lastName}
                   name="lastName"
                   placeholder="Last Name"
                   value={state.lastName}
                   onChange={onChangeHandler}
+                  onBlur={onBlurValidation}
                 />
+                <FormFeedback>{errors.lastName}</FormFeedback>
               </Col>
             </FormGroup>
             <FormGroup row>
@@ -170,11 +254,15 @@ function Contact(props) {
                 <Input
                   type="tel"
                   id="telNo"
+                  valid={!errors.telNo && state.telNo.length > 0}
+                  invalid={errors.telNo}
                   name="telNo"
                   placeholder="Tel. Number"
                   value={state.telNo}
                   onChange={onChangeHandler}
+                  onBlur={onBlurValidation}
                 />
+                <FormFeedback>{errors.telNo}</FormFeedback>
               </Col>
             </FormGroup>
             <FormGroup row>
@@ -185,11 +273,15 @@ function Contact(props) {
                 <Input
                   type="email"
                   id="email"
+                  valid={!errors.email && state.email.length > 0}
+                  invalid={errors.email}
                   name="email"
                   placeholder="E-mail"
                   value={state.email}
                   onChange={onChangeHandler}
+                  onBlur={onBlurValidation}
                 />
+                <FormFeedback>{errors.email}</FormFeedback>
               </Col>
             </FormGroup>
             <FormGroup row>
