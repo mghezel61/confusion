@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import NavLink from "react-router-dom/NavLink";
 import { FcHome, FcInfo, FcMenu, FcContacts } from "react-icons/fc";
+import { BiLogIn } from "react-icons/bi";
+import { FcPortraitMode } from "react-icons/fc";
 import {
   Navbar,
   NavbarBrand,
@@ -9,12 +11,44 @@ import {
   Collapse,
   NavItem,
   Jumbotron,
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  FormGroup,
+  Label,
+  Input,
+  Form,
 } from "reactstrap";
 
 const Header = () => {
-  const [isNavOpen, setIsNavOpen] = useState(false);
+  const loginFormValues = {
+    username: useRef(""),
+    password: useRef(""),
+    rememberMe: useRef(false),
+  };
+
+  const [state, setState] = useState({
+    isNavOpen: false,
+    isModalOpen: false,
+  });
+
+  // toggle nav
   const toggleNav = () => {
-    setIsNavOpen(!isNavOpen);
+    setState({ ...state, isNavOpen: !state.isNavOpen });
+  };
+  const toggleModal = () => {
+    setState({ ...state, isModalOpen: !state.isModalOpen });
+  };
+
+  // handle login form
+  const loginHandler = (e) => {
+    const username = loginFormValues.username.current.value;
+    const password = loginFormValues.password.current.value;
+    const rememberMe = loginFormValues.rememberMe.current.checked;
+    alert(username + " ," + password + " ," + rememberMe);
+
+    e.preventDefault();
   };
   return (
     <>
@@ -29,42 +63,55 @@ const Header = () => {
               alt="Restaurant Confusion"
             />
           </NavbarBrand>
-          <Collapse isOpen={isNavOpen} navbar>
+          <Collapse isOpen={state.isNavOpen} navbar>
             <Nav navbar>
               <NavItem>
-                <NavLink className="nav-link" to="/home">
+                <NavLink className="nav-link btn-icon" to="/home">
                   <span>
-                    <FcHome size="2rem" />
+                    <FcHome size="1.5rem" />
                   </span>
-                  <span> Home</span>
+                  <span>Home</span>
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink className="nav-link" to="/aboutus">
+                <NavLink className="nav-link btn-icon" to="/aboutus">
                   <span>
-                    <FcInfo size="2rem" />
+                    <FcInfo size="1.5rem" />
                   </span>
                   <span>About Us</span>
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink className="nav-link" to="/menu">
+                <NavLink className="nav-link btn-icon" to="/menu">
                   <span>
-                    <FcMenu size="2rem" />
+                    <FcMenu size="1.5rem" />
                   </span>
                   <span>Menu</span>
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink className="nav-link" to="/contactus">
+                <NavLink className="nav-link btn-icon" to="/contactus">
                   <span>
-                    <FcContacts size="2rem" />
+                    <FcContacts size="1.5rem" />
                   </span>
                   <span>Contact Us</span>
                 </NavLink>
               </NavItem>
             </Nav>
           </Collapse>
+          <Nav className="ml-auto" navbar>
+            <NavItem>
+              <Button
+                className="btn btn-outline-primary text-white btn-icon"
+                onClick={toggleModal}
+              >
+                <span>
+                  <FcPortraitMode size="1.5rem" />
+                </span>
+                <span>Login</span>
+              </Button>
+            </NavItem>
+          </Nav>
         </div>
       </Navbar>
       <Jumbotron>
@@ -80,6 +127,50 @@ const Header = () => {
           </div>
         </div>
       </Jumbotron>
+      {/* Modal */}
+      <Modal isOpen={state.isModalOpen} toggle={toggleModal}>
+        <ModalHeader toggle={toggleModal}>Login</ModalHeader>
+        <ModalBody>
+          <Form onSubmit={loginHandler}>
+            <FormGroup>
+              <Label for="username">Username</Label>
+              <Input
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Username"
+                innerRef={loginFormValues.username}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="password">Password</Label>
+              <Input
+                type="text"
+                id="password"
+                name="password"
+                placeholder="Password"
+                innerRef={loginFormValues.password}
+              />
+            </FormGroup>
+            <FormGroup check>
+              <Label check for="rememberMe">
+                <Input
+                  type="checkbox"
+                  id="rememberMe"
+                  innerRef={loginFormValues.rememberMe}
+                  name="rememberMe"
+                />
+                Remember Me
+              </Label>
+            </FormGroup>
+            <FormGroup>
+              <Button type="submit" id="submit" className="btn bg-primary">
+                Login
+              </Button>
+            </FormGroup>
+          </Form>
+        </ModalBody>
+      </Modal>
     </>
   );
 };

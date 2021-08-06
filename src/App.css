@@ -33,10 +33,14 @@ address {
   background-color: #512da8;
 }
 
-.nav-link {
+.btn-icon {
   display: flex;
   align-items: center;
+  justify-content: space-around;
+  padding: 4px 10px;
 }
-.nav-link span {
+
+.btn-icon span:nth-child(1) {
   display: inline-block;
+  margin: 5px 2px 0 0;
 }

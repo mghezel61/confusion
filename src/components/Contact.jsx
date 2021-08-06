@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -8,6 +8,7 @@ import {
   Label,
   Input,
   Col,
+  Button,
 } from "reactstrap";
 import { Link } from "react-router-dom";
 
@@ -60,13 +61,6 @@ function Contact(props) {
       }
     }
   };
-
-  // const onBlurValidation1 = (field) => (e) => {
-  //   console.log("field", field);
-  //   console.log("name", e.target.name);
-  //   console.log("value", e.target.value);
-  //   console.log("type", e.target.type);
-  // };
 
   // Validation
   const onBlurValidation = (e) => {
@@ -329,11 +323,9 @@ function Contact(props) {
             </FormGroup>
             <FormGroup row>
               <Col md={{ size: 10, offset: 2 }}>
-                <Input
-                  type="submit"
-                  value="Send Message"
-                  className="btn btn-primary"
-                />
+                <Button type="submit" className="btn bg-primary">
+                  Send Message
+                </Button>
               </Col>
             </FormGroup>
           </Form>
