@@ -1,142 +1,26 @@
-import React, { useState } from "react";
+/* eslint-disable react/jsx-pascal-case */
+import React from "react";
 import {
   Breadcrumb,
   BreadcrumbItem,
-  Form,
-  FormGroup,
-  FormFeedback,
   Label,
-  Input,
   Col,
   Button,
+  Row,
 } from "reactstrap";
 import { Link } from "react-router-dom";
+import { Control, LocalForm, Errors } from "react-redux-form";
 
 function Contact(props) {
-  const [state, setState] = useState({
-    firstName: "",
-    lastName: "",
-    telNo: "",
-    email: "",
-    agree: false,
-    contactType: "Tel.",
-    message: "",
-  });
-
-  const [errors, setErrors] = useState({
-    firstName: "",
-    lastName: "",
-    telNo: "",
-    email: "",
-  });
-
-  // Handle the form changes
-  const onChangeHandler = (e) => {
-    const name = e.target.name;
-    const type = e.target.type;
-    if (type === "checkbox") {
-      setState({ ...state, agree: e.target.checked });
-    } else {
-      switch (name) {
-        case "firstName":
-          setState({ ...state, firstName: e.target.value });
-          break;
-        case "lastName":
-          setState({ ...state, lastName: e.target.value });
-          break;
-        case "telNo":
-          setState({ ...state, telNo: e.target.value });
-          break;
-        case "email":
-          setState({ ...state, email: e.target.value });
-          break;
-        case "contactType":
-          setState({ ...state, contactType: e.target.value });
-          break;
-        case "message":
-          setState({ ...state, message: e.currentTarget.value });
-          break;
-        default:
-          break;
-      }
-    }
-  };
-
-  // Validation
-  const onBlurValidation = (e) => {
-    const name = e.target.name;
-    const telReg = /^\d+$/;
-    const emailReg =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-    switch (name) {
-      case "firstName":
-        console.log("Length", state.firstName.length);
-        setErrors({ ...errors, firstName: "" });
-        if (state.firstName && state.firstName.length < 3) {
-          setErrors({
-            ...errors,
-            firstName: "First name should be >= 3 character",
-          });
-        } else if (state.firstName && state.firstName.length > 20) {
-          setErrors({
-            ...errors,
-            firstName: "First name should be <= 20 character",
-          });
-        }
-        break;
-      case "lastName":
-        setErrors({ ...errors, lastName: "" });
-        if (state.lastName && state.lastName.length < 3) {
-          setErrors({
-            ...errors,
-            lastName: "First name should be >= 3 character",
-          });
-        } else if (state.lastName && state.lastName.length > 20) {
-          setErrors({
-            ...errors,
-            lastName: "Last name should be <= 20 character",
-          });
-        }
-
-        break;
-      case "telNo":
-        setErrors({ ...errors, telNo: "" });
-        if (state.telNo && !telReg.test(state.telNo)) {
-          setErrors({
-            ...errors,
-            telNo: "Tel. Number should contain only numbers",
-          });
-        }
-        break;
-      case "email":
-        setErrors({ ...errors, email: "" });
-        if (state.email && !emailReg.test(state.email)) {
-          setErrors({
-            ...errors,
-            email: "Please enter a valid email address!",
-          });
-        }
-        break;
-      default:
-        break;
-    }
-  };
-
   // form handler
-  const onSubmitHandler = (e) => {
-    e.preventDefault();
-    alert(JSON.stringify(state));
-    setState({
-      firstName: "",
-      lastName: "",
-      telNo: "",
-      email: "",
-      agree: false,
-      contactType: "Tel.",
-      message: "",
-    });
-  };
+  function onSubmitHandler(values) {
+    alert(JSON.stringify(values));
+    console.log(values);
+  }
+  // const onSubmitHandler = (values) => {
+  //   e.preventDefault();
+  //   alert(JSON.stringify());
+  // };
 
   return (
     <div className="container">
@@ -201,134 +85,108 @@ function Contact(props) {
           <h3>Send us Your Feedback</h3>
         </div>
         <div className="col-12 col-md-9">
-          <Form onSubmit={onSubmitHandler}>
-            <FormGroup row>
+          <LocalForm onSubmit={onSubmitHandler}>
+            <Row className="form-group">
               <Label for="firstName" md={2}>
                 First Name
               </Label>
               <Col md={10}>
-                <Input
-                  type="text"
-                  valid={!errors.firstName && state.firstName.length > 0}
-                  invalid={errors.firstName}
+                <Control.text
+                  model=".firstName"
+                  className="form-control"
                   id="firstName"
                   name="firstName"
                   placeholder="First Name"
-                  value={state.firstName}
-                  onChange={onChangeHandler}
-                  onBlur={onBlurValidation}
                 />
-                <FormFeedback>{errors.firstName}</FormFeedback>
               </Col>
-            </FormGroup>
-            <FormGroup row>
+            </Row>
+            <Row className="form-group">
               <Label for="lastName" md={2}>
                 Last Name
               </Label>
               <Col md={10}>
-                <Input
-                  type="text"
+                <Control.text
+                  model=".lastName"
                   id="lastName"
-                  valid={!errors.lastName && state.lastName.length > 0}
-                  invalid={errors.lastName}
                   name="lastName"
-                  placeholder="Last Name"
-                  value={state.lastName}
-                  onChange={onChangeHandler}
-                  onBlur={onBlurValidation}
+                  className="form-control"
                 />
-                <FormFeedback>{errors.lastName}</FormFeedback>
               </Col>
-            </FormGroup>
-            <FormGroup row>
+            </Row>
+            <Row className="form-group">
               <Label for="telNo" md={2}>
                 Contact tel.
               </Label>
               <Col md={10}>
-                <Input
-                  type="tel"
+                <Control.text
+                  model=".telNo"
                   id="telNo"
-                  valid={!errors.telNo && state.telNo.length > 0}
-                  invalid={errors.telNo}
                   name="telNo"
-                  placeholder="Tel. Number"
-                  value={state.telNo}
-                  onChange={onChangeHandler}
-                  onBlur={onBlurValidation}
+                  className="form-control"
                 />
-                <FormFeedback>{errors.telNo}</FormFeedback>
               </Col>
-            </FormGroup>
-            <FormGroup row>
+            </Row>
+            <Row className="form-group">
               <Label for="email" md={2}>
                 Email
               </Label>
               <Col md={10}>
-                <Input
-                  type="email"
+                <Control.text
+                  model=".email"
                   id="email"
-                  valid={!errors.email && state.email.length > 0}
-                  invalid={errors.email}
                   name="email"
-                  placeholder="E-mail"
-                  value={state.email}
-                  onChange={onChangeHandler}
-                  onBlur={onBlurValidation}
+                  className="form-control"
                 />
-                <FormFeedback>{errors.email}</FormFeedback>
               </Col>
-            </FormGroup>
-            <FormGroup row>
+            </Row>
+            <Row className="form-group">
               <Col md={{ size: 6, offset: 2 }}>
-                <FormGroup check>
+                <div className="form-check">
                   <Label for="agree" check>
-                    <Input
-                      type="checkbox"
+                    <Control.checkbox
+                      model=".agree"
                       name="agree"
                       id="agree"
-                      checked={state.agree}
-                      onChange={onChangeHandler}
+                      className="form-check-input"
                     />{" "}
                     <strong>May we contact you?</strong>
                   </Label>
-                </FormGroup>
+                </div>
               </Col>
               <Col md={{ size: 3, offset: 1 }}>
-                <Input
-                  type="select"
+                <Control.select
+                  model=".contactType"
                   name="contactType"
-                  value={state.contactType}
-                  onChange={onChangeHandler}
+                  className="form-control"
                 >
                   <option value="tel">Tel.</option>
                   <option value="email">Email</option>
-                </Input>
+                </Control.select>
               </Col>
-            </FormGroup>
-            <FormGroup row>
+            </Row>
+            <Row className="form-group">
               <Label for="message" md={2}>
                 Your Feedback
               </Label>
               <Col md={10}>
-                <Input
-                  type="textarea"
+                <Control.textarea
+                  model=".message"
                   id="message"
                   name="message"
                   placeholder="Enter your message"
                   rows="12"
-                  value={state.message}
-                  onChange={onChangeHandler}
+                  className="form-control"
                 />
               </Col>
-            </FormGroup>
-            <FormGroup row>
+            </Row>
+            <Row className="form-group">
               <Col md={{ size: 10, offset: 2 }}>
                 <Button type="submit" className="btn custom-bg-primary">
                   Send Message
                 </Button>
               </Col>
-            </FormGroup>
-          </Form>
+            </Row>
+          </LocalForm>
         </div>
       </div>
     </div>
