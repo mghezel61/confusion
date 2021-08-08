@@ -5,9 +5,6 @@ import {
   Card,
   CardBody,
   CardHeader,
-  CardImg,
-  CardTitle,
-  CardText,
   Media,
 } from "reactstrap";
 import { Link } from "react-router-dom";

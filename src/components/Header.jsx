@@ -1,7 +1,6 @@
 import React, { useState, useRef } from "react";
 import NavLink from "react-router-dom/NavLink";
 import { FcHome, FcInfo, FcMenu, FcContacts } from "react-icons/fc";
-import { BiLogIn } from "react-icons/bi";
 import { FcPortraitMode } from "react-icons/fc";
 import {
   Navbar,
@@ -101,10 +100,7 @@ const Header = () => {
           </Collapse>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <Button
-                className="btn btn-outline-primary text-white btn-icon"
-                onClick={toggleModal}
-              >
+              <Button className="btn-icon" onClick={toggleModal}>
                 <span>
                   <FcPortraitMode size="1.5rem" />
                 </span>
@@ -164,7 +160,7 @@ const Header = () => {
               </Label>
             </FormGroup>
             <FormGroup>
-              <Button type="submit" id="submit" className="btn bg-primary">
+              <Button type="submit" id="submit" className="custom-bg-primary">
                 Login
               </Button>
             </FormGroup>

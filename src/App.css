@@ -34,13 +34,26 @@ address {
 }
 
 .btn-icon {
+  color: rgba(255, 255, 255, 0.5);
   display: flex;
   align-items: center;
-  justify-content: space-around;
   padding: 4px 10px;
+  border: solid rgba(255, 255, 255, 0.5) 0px;
+  background: rgba(255, 255, 255, 0);
+}
+.btn-icon:hover {
+  background: #9575cd;
 }
 
 .btn-icon span:nth-child(1) {
   display: inline-block;
   margin: 5px 2px 0 0;
+}
+
+.custom-bg-primary {
+  background-color: #512da8 !important;
+}
+.custom-bg-primary:hover,
+.custom-bg-primary:focus {
+  background: #9575cd !important;
 }

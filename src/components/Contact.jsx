@@ -323,7 +323,7 @@ function Contact(props) {
             </FormGroup>
             <FormGroup row>
               <Col md={{ size: 10, offset: 2 }}>
-                <Button type="submit" className="btn bg-primary">
+                <Button type="submit" className="btn custom-bg-primary">
                   Send Message
                 </Button>
               </Col>
