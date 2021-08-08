@@ -17,10 +17,14 @@ function Contact(props) {
     alert(JSON.stringify(values));
     console.log(values);
   }
-  // const onSubmitHandler = (values) => {
-  //   e.preventDefault();
-  //   alert(JSON.stringify());
-  // };
+
+  // validation functions
+  const required = (val) => val && val.length;
+  const maxLength = (len) => (val) => !val || val.length <= len;
+  const minLength = (len) => (val) => val && val.length >= len;
+  const isNumber = (val) => !isNaN(val);
+  const validEmail = (val) =>
+    /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
 
   return (
     <div className="container">
@@ -93,10 +97,25 @@ function Contact(props) {
               <Col md={10}>
                 <Control.text
                   model=".firstName"
+                  validators={{
+                    required,
+                    minLength: minLength(3),
+                    maxLength: maxLength(15),
+                  }}
                   className="form-control"
                   id="firstName"
                   name="firstName"
                   placeholder="First Name"
+                />
+                <Errors
+                  className="text-danger"
+                  model=".firstName"
+                  show="touched"
+                  messages={{
+                    required: "required, ",
+                    minLength: "Must be greater than 2 char.",
+                    maxLength: "Must be smaller than 16 char.",
+                  }}
                 />
               </Col>
             </Row>
@@ -107,9 +126,25 @@ function Contact(props) {
               <Col md={10}>
                 <Control.text
                   model=".lastName"
+                  validators={{
+                    required,
+                    minLength: minLength(3),
+                    maxLength: maxLength(20),
+                  }}
                   id="lastName"
                   name="lastName"
                   className="form-control"
+                  placeholder="Last Name"
+                />
+                <Errors
+                  className="text-danger"
+                  model=".lastName"
+                  show="touched"
+                  messages={{
+                    required: "required, ",
+                    minLength: "Must be greater than 2 char.",
+                    maxLength: "Must be smaller than 21 char.",
+                  }}
                 />
               </Col>
             </Row>
@@ -120,9 +155,27 @@ function Contact(props) {
               <Col md={10}>
                 <Control.text
                   model=".telNo"
+                  validators={{
+                    required,
+                    minLength: minLength(3),
+                    maxLength: maxLength(15),
+                    isNumber,
+                  }}
                   id="telNo"
                   name="telNo"
                   className="form-control"
+                  placeholder="Tel. No."
+                />
+                <Errors
+                  className="text-danger"
+                  model=".telNo"
+                  show="touched"
+                  messages={{
+                    required: "required, ",
+                    minLength: "Must be greater than 4 number.",
+                    maxLength: "Must be smaller than 16 number.",
+                    isNumber: "Please enter a valid Tel. number",
+                  }}
                 />
               </Col>
             </Row>
@@ -133,9 +186,23 @@ function Contact(props) {
               <Col md={10}>
                 <Control.text
                   model=".email"
+                  validators={{
+                    required,
+                    validEmail,
+                  }}
                   id="email"
                   name="email"
                   className="form-control"
+                  placeholder="example@example.exam"
+                />
+                <Errors
+                  className="text-danger"
+                  model=".email"
+                  show="touched"
+                  messages={{
+                    required: "required, ",
+                    validEmail: "Please enter a valid email address",
+                  }}
                 />
               </Col>
             </Row>
