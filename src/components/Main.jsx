@@ -7,8 +7,9 @@ import Contact from "./Contact";
 import DishDetail from "./DishDetail";
 import About from "./About";
 import { connect } from "react-redux";
+import { addComment } from "../redux/ActionCreators";
 
-const mapStateToStore = (state) => {
+const mapStateToProps = (state) => {
   return {
     dishes: state.dishes,
     comments: state.comments,
@@ -16,7 +17,14 @@ const mapStateToStore = (state) => {
     leaders: state.leaders,
   };
 };
-const Main = ({ dishes, promotions, leaders, comments }) => {
+
+const mapDispatchToProps = (dispatch) => ({
+  addComment: (dishId, rating, author, comment) =>
+    dispatch(addComment(dishId, rating, author, comment)),
+});
+
+const Main = (props) => {
+  const { dishes, promotions, leaders, comments } = props;
   const HomePage = () => (
     <Home
       dish={dishes.filter((dish) => dish.featured)[0]}
@@ -33,6 +41,7 @@ const Main = ({ dishes, promotions, leaders, comments }) => {
         <DishDetail
           dish={dishes.filter((dish) => dish.id === dishId)[0]}
           comments={comments.filter((comment) => comment.dishId === dishId)}
+          addComment={props.addComment}
         />
       );
     }
@@ -63,4 +72,4 @@ const Main = ({ dishes, promotions, leaders, comments }) => {
   );
 };
 
-export default withRouter(connect(mapStateToStore)(Main));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));

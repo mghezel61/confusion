@@ -11,9 +11,10 @@ import {
 import { Link } from "react-router-dom";
 import CommentForm from "./CommentForm";
 
-const DishDetail = ({ dish, comments }) => {
+const DishDetail = (props) => {
+  const { dish, comments } = props;
   // render comments
-  const RenderComments = ({ comments }) => (
+  const RenderComments = ({ comments, addComment, dishId }) => (
     <div className="col-12 col-md-5 m-1">
       <h2>Comments</h2>
       {comments.map((comment) => (
@@ -29,7 +30,7 @@ const DishDetail = ({ dish, comments }) => {
           </CardText>
         </li>
       ))}
-      <CommentForm />
+      <CommentForm dishId={dishId} addComment={addComment} />
     </div>
   );
   // render dish
@@ -64,7 +65,11 @@ const DishDetail = ({ dish, comments }) => {
         <hr />
         <div className="row">
           <RenderDish dish={dish} />
-          <RenderComments comments={comments} />
+          <RenderComments
+            comments={comments}
+            addComment={props.addComment}
+            dishId={dish.id}
+          />
         </div>
       </div>
     );

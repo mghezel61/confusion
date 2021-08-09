@@ -12,7 +12,7 @@ import {
 } from "reactstrap";
 import { Control, LocalForm, Errors } from "react-redux-form";
 
-const CommentForm = () => {
+const CommentForm = ({ dishId, addComment }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -20,7 +20,7 @@ const CommentForm = () => {
 
   //   submit handler
   const onSubmitHandler = (values) => {
-    alert(JSON.stringify(values));
+    addComment(dishId, values.rating, values.author, values.comment);
   };
 
   //   Validation functions
@@ -62,14 +62,14 @@ const CommentForm = () => {
               </Col>
             </Row>
             <Row>
-              <Label for="name" md={4}>
+              <Label for="author" md={4}>
                 Your Name
               </Label>
               <Col md={12}>
                 <Control.text
-                  model=".name"
-                  id="name"
-                  name="name"
+                  model=".author"
+                  id="author"
+                  name="author"
                   validators={{
                     required,
                     minLength: minLength(3),
@@ -91,15 +91,15 @@ const CommentForm = () => {
               </Col>
             </Row>
             <Row className="form-group">
-              <Label for="message" md={2}>
+              <Label for="comment" md={2}>
                 Comment
               </Label>
               <Col md={12}>
                 <Control.textarea
-                  model=".message"
-                  id="message"
-                  name="message"
-                  placeholder="Enter your message"
+                  model=".comment"
+                  id="comment"
+                  name="comment"
+                  placeholder="Enter your comment"
                   rows="8"
                   className="form-control"
                 />
