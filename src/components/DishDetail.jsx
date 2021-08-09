@@ -9,6 +9,7 @@ import {
   BreadcrumbItem,
 } from "reactstrap";
 import { Link } from "react-router-dom";
+import CommentForm from "./CommentForm";
 
 const DishDetail = ({ dish, comments }) => {
   // render comments
@@ -28,6 +29,7 @@ const DishDetail = ({ dish, comments }) => {
           </CardText>
         </li>
       ))}
+      <CommentForm />
     </div>
   );
   // render dish
