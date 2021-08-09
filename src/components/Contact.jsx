@@ -18,6 +18,7 @@ function Contact(props) {
     console.log(values);
   }
 
+
   // validation functions
   const required = (val) => val && val.length;
   const maxLength = (len) => (val) => !val || val.length <= len;
