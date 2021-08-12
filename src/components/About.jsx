@@ -8,13 +8,15 @@ import {
   Media,
 } from "reactstrap";
 import { Link } from "react-router-dom";
+import { baseUrl } from "../shared/baseUrl";
+import { Spinner } from "./Spinner";
 
 function About({ leaders }) {
   // render leader
   const RenderLeader = ({ leader }) => (
     <Media className="mb-4">
       <Media left href="#" className="mr-4">
-        <Media object src={leader.image} alt={leader.name} />
+        <Media object src={baseUrl + leader.image} alt={leader.name} />
       </Media>
       <Media body>
         <Media heading>{leader.name}</Media>
@@ -24,9 +26,17 @@ function About({ leaders }) {
     </Media>
   );
 
-  const localLeaders = leaders.map((leader) => {
-    return <RenderLeader leader={leader} />;
-  });
+  const localLeaders = leaders.isLoading ? (
+    <div>
+      <Spinner />
+    </div>
+  ) : leaders.errMess ? (
+    <div>{leaders.errMess}</div>
+  ) : (
+    leaders.leaders.map((leader) => {
+      return <RenderLeader key={leader.id} leader={leader} />;
+    })
+  );
 
   return (
     <div className="container">

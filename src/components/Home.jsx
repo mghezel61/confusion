@@ -7,6 +7,7 @@ import {
   CardTitle,
   CardSubtitle,
 } from "reactstrap";
+import { baseUrl } from "../shared/baseUrl";
 import { Spinner } from "./Spinner";
 
 const RenderCard = ({ item, isLoading, errMess }) => {
@@ -29,7 +30,7 @@ const RenderCard = ({ item, isLoading, errMess }) => {
   } else
     return (
       <Card>
-        <CardImg src={item.image} alt={item.name} />
+        <CardImg src={baseUrl + item.image} alt={item.name} />
         <CardBody>
           <CardTitle>{item.name}</CardTitle>
           {item.designation ? (
@@ -40,7 +41,17 @@ const RenderCard = ({ item, isLoading, errMess }) => {
       </Card>
     );
 };
-const Home = ({ dish, leader, promotion, dishesLoading, dishesError }) => {
+const Home = ({
+  dish,
+  leader,
+  promotion,
+  dishesLoading,
+  dishesError,
+  promotionsLoading,
+  promotionsError,
+  leadersLoading,
+  leadersError,
+}) => {
   return (
     <div className="container">
       <div className="row">
@@ -52,10 +63,18 @@ const Home = ({ dish, leader, promotion, dishesLoading, dishesError }) => {
           />
         </div>
         <div className="col-12 col-md m-1">
-          <RenderCard item={promotion} />
+          <RenderCard
+            item={promotion}
+            isLoading={promotionsLoading}
+            errMess={promotionsError}
+          />
         </div>
         <div className="col-12 col-md m-1">
-          <RenderCard item={leader} />
+          <RenderCard
+            item={leader}
+            isLoading={leadersLoading}
+            errMess={leadersError}
+          />
         </div>
       </div>
     </div>

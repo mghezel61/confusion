@@ -19,6 +19,7 @@ import {
   Input,
   Form,
 } from "reactstrap";
+import { baseUrl } from "../shared/baseUrl";
 
 const Header = () => {
   const loginFormValues = {
@@ -57,7 +58,7 @@ const Header = () => {
           <NavbarToggler onClick={toggleNav} />
           <NavbarBrand className="mr-auto" href="/">
             <img
-              src="assets/images/logo.png"
+              src={`${baseUrl}images/logo.png`}
               height="30"
               width="41"
               alt="Restaurant Confusion"

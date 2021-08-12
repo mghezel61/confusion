@@ -11,6 +11,7 @@ import {
 import { Link } from "react-router-dom";
 import CommentForm from "./CommentForm";
 import { Spinner } from "./Spinner";
+import { baseUrl } from "../shared/baseUrl";
 
 const DishDetail = (props) => {
   const { dish, comments } = props;
@@ -41,7 +42,7 @@ const DishDetail = (props) => {
       <>
         <div className=" col-12 col-md-6 mb-3">
           <Card>
-            <CardImg width="100%" src={dish.image} alt={dish.name} />
+            <CardImg width="100%" src={baseUrl + dish.image} alt={dish.name} />
             <CardBody>
               <CardTitle>{dish.name}</CardTitle>
               <CardText>{dish.description}</CardText>

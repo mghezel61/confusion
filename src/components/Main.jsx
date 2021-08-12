@@ -3,7 +3,13 @@ import { useEffect } from "react";
 import { connect } from "react-redux";
 import { Redirect, Route, Switch, withRouter } from "react-router-dom";
 import { actions } from "react-redux-form";
-import { addComment, fetchDishes } from "../redux/ActionCreators";
+import {
+  addComment,
+  fetchComments,
+  fetchDishes,
+  fetchLeaders,
+  fetchPromos,
+} from "../redux/ActionCreators";
 import About from "./About";
 import Contact from "./Contact";
 import DishDetail from "./DishDetail";
@@ -17,14 +23,23 @@ const Main = (props) => {
 
   useEffect(() => {
     props.fetchDishes();
+    props.fetchComments();
+    props.fetchLeaders();
+    props.fetchPromos();
   }, []);
   const HomePage = () => (
     <Home
       dish={props.dishes.dishes.filter((dish) => dish.featured)[0]}
       dishesLoading={props.dishes.isLoading}
       dishesError={props.dishes.errMess}
-      promotion={promotions.filter((promotion) => promotion.featured)[0]}
-      leader={leaders.filter((leader) => leader.featured)[0]}
+      promotion={
+        promotions.promotions.filter((promotion) => promotion.featured)[0]
+      }
+      promotionsLoading={promotions.isLoading}
+      promotionsError={promotions.errMess}
+      leader={leaders.leaders.filter((leader) => leader.featured)[0]}
+      leadersLoading={leaders.isLoading}
+      leadersError={leaders.errMess}
     />
   );
 
@@ -37,7 +52,9 @@ const Main = (props) => {
           dish={props.dishes.dishes.filter((dish) => dish.id === dishId)[0]}
           isLoading={props.dishes.isLoading}
           ErrorMess={props.dishes.errMess}
-          comments={comments.filter((comment) => comment.dishId === dishId)}
+          comments={comments.comments.filter(
+            (comment) => comment.dishId === dishId
+          )}
           addComment={props.addComment}
         />
       );
@@ -52,7 +69,7 @@ const Main = (props) => {
           <Route
             exact
             path="/aboutus"
-            component={() => <About leaders={leaders} />}
+            component={() => <About leaders={props.leaders} />}
           />
           <Route
             exact
@@ -91,6 +108,15 @@ const mapDispatchToProps = (dispatch) => ({
 
   fetchDishes: () => {
     dispatch(fetchDishes());
+  },
+  fetchComments: () => {
+    dispatch(fetchComments());
+  },
+  fetchLeaders: () => {
+    dispatch(fetchLeaders());
+  },
+  fetchPromos: () => {
+    dispatch(fetchPromos());
   },
   resetFeedbackForm: () => dispatch(actions.reset("feedback")),
 });
