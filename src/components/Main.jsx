@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import { connect } from "react-redux";
 import { Redirect, Route, Switch, withRouter } from "react-router-dom";
+import { actions } from "react-redux-form";
 import { addComment, fetchDishes } from "../redux/ActionCreators";
 import About from "./About";
 import Contact from "./Contact";
@@ -60,7 +61,13 @@ const Main = (props) => {
             // component={() => <Menu dishes={props.dishes} />}
           />
           <Route exact path="/menu/:dishId" component={DishWithId} />
-          <Route exact path="/contactus" component={Contact} />
+          <Route
+            exact
+            path="/contactus"
+            component={() => (
+              <Contact resetFeedbackForm={props.resetFeedbackForm} />
+            )}
+          />
           <Redirect to="/home" />
         </Switch>
       </div>
@@ -85,6 +92,7 @@ const mapDispatchToProps = (dispatch) => ({
   fetchDishes: () => {
     dispatch(fetchDishes());
   },
+  resetFeedbackForm: () => dispatch(actions.reset("feedback")),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));
