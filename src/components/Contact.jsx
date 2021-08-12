@@ -15,9 +15,7 @@ function Contact(props) {
   // form handler
   function onSubmitHandler(values) {
     alert(JSON.stringify(values));
-    console.log(values);
   }
-
 
   // validation functions
   const required = (val) => val && val.length;

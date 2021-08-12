@@ -24,7 +24,6 @@ function About({ leaders }) {
     </Media>
   );
 
-  console.log(leaders);
   const localLeaders = leaders.map((leader) => {
     return <RenderLeader leader={leader} />;
   });

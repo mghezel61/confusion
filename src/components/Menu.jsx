@@ -8,11 +8,12 @@ import {
   BreadcrumbItem,
 } from "reactstrap";
 import { Link } from "react-router-dom";
+import { Spinner } from "./Spinner";
 
 const Menu = ({ dishes }) => {
   //   Menu component
   const RenderMenu = ({ dishes }) => {
-    return dishes.map((dish) => (
+    return dishes.dishes.map((dish) => (
       <div key={dish.id} className="col-12 col-md-6 mb-3">
         <Card>
           <Link to={`/menu/${dish.id}`}>
@@ -25,6 +26,24 @@ const Menu = ({ dishes }) => {
       </div>
     ));
   };
+  if (dishes.isLoading) {
+    return (
+      <div className="col-12">
+        <div className="row">
+          <Spinner />
+        </div>
+      </div>
+    );
+  }
+  if (dishes.errMess) {
+    return (
+      <div className="col-12">
+        <div className="row">
+          <h4>{dishes.errMess}</h4>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="container">
       <div className="row">

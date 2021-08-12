@@ -1,33 +1,27 @@
-import Menu from "./Menu";
-import Header from "./Header";
-import Footer from "./Footer";
-import { Route, Redirect, Switch, withRouter } from "react-router-dom";
-import Home from "./Home";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect } from "react";
+import { connect } from "react-redux";
+import { Redirect, Route, Switch, withRouter } from "react-router-dom";
+import { addComment, fetchDishes } from "../redux/ActionCreators";
+import About from "./About";
 import Contact from "./Contact";
 import DishDetail from "./DishDetail";
-import About from "./About";
-import { connect } from "react-redux";
-import { addComment } from "../redux/ActionCreators";
-
-const mapStateToProps = (state) => {
-  return {
-    dishes: state.dishes,
-    comments: state.comments,
-    promotions: state.promotions,
-    leaders: state.leaders,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => ({
-  addComment: (dishId, rating, author, comment) =>
-    dispatch(addComment(dishId, rating, author, comment)),
-});
+import Footer from "./Footer";
+import Header from "./Header";
+import Home from "./Home";
+import Menu from "./Menu";
 
 const Main = (props) => {
-  const { dishes, promotions, leaders, comments } = props;
+  const { promotions, leaders, comments } = props;
+
+  useEffect(() => {
+    props.fetchDishes();
+  }, []);
   const HomePage = () => (
     <Home
-      dish={dishes.filter((dish) => dish.featured)[0]}
+      dish={props.dishes.dishes.filter((dish) => dish.featured)[0]}
+      dishesLoading={props.dishes.isLoading}
+      dishesError={props.dishes.errMess}
       promotion={promotions.filter((promotion) => promotion.featured)[0]}
       leader={leaders.filter((leader) => leader.featured)[0]}
     />
@@ -39,7 +33,9 @@ const Main = (props) => {
     if (dishId !== undefined) {
       return (
         <DishDetail
-          dish={dishes.filter((dish) => dish.id === dishId)[0]}
+          dish={props.dishes.dishes.filter((dish) => dish.id === dishId)[0]}
+          isLoading={props.dishes.isLoading}
+          ErrorMess={props.dishes.errMess}
           comments={comments.filter((comment) => comment.dishId === dishId)}
           addComment={props.addComment}
         />
@@ -60,7 +56,8 @@ const Main = (props) => {
           <Route
             exact
             path="/menu"
-            component={() => <Menu dishes={dishes} />}
+            component={() => <Menu dishes={props.dishes} />}
+            // component={() => <Menu dishes={props.dishes} />}
           />
           <Route exact path="/menu/:dishId" component={DishWithId} />
           <Route exact path="/contactus" component={Contact} />
@@ -71,5 +68,23 @@ const Main = (props) => {
     </>
   );
 };
+
+const mapStateToProps = (state) => {
+  return {
+    dishes: state.dishes,
+    comments: state.comments,
+    promotions: state.promotions,
+    leaders: state.leaders,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  addComment: (dishId, rating, author, comment) =>
+    dispatch(addComment(dishId, rating, author, comment)),
+
+  fetchDishes: () => {
+    dispatch(fetchDishes());
+  },
+});
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));
