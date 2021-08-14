@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Redirect, Route, Switch, withRouter } from "react-router-dom";
 import { actions } from "react-redux-form";
 import {
-  addComment,
+  postComment,
   fetchComments,
   fetchDishes,
   fetchLeaders,
@@ -19,9 +19,7 @@ import Home from "./Home";
 import Menu from "./Menu";
 
 const Main = (props) => {
-  const { promotions, leaders, comments } = props;
-  console.log("comments", comments);
-  console.log("leaders", leaders);
+  const { promotions, leaders } = props;
 
   useEffect(() => {
     props.fetchDishes();
@@ -49,17 +47,17 @@ const Main = (props) => {
     const dishId = +params.dishId;
 
     if (dishId !== undefined) {
+      console.log("comments", props.comments.errMess);
       return (
         <DishDetail
           dish={props.dishes.dishes.filter((dish) => dish.id === dishId)[0]}
           isLoading={props.dishes.isLoading}
           errMess={props.dishes.errMess}
-          comments={comments.comments.filter(
+          comments={props.comments.comments.filter(
             (comment) => comment.dishId === dishId
           )}
-          commentsLoading={comments.isLoading}
-          commentsErrMess={comments.errMess}
-          addComment={props.addComment}
+          commentsErrMess={props.comments.errMess}
+          postComment={props.postComment}
         />
       );
     }
@@ -107,8 +105,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  addComment: (dishId, rating, author, comment) =>
-    dispatch(addComment(dishId, rating, author, comment)),
+  postComment: (dishId, rating, author, comment) =>
+    dispatch(postComment(dishId, rating, author, comment)),
 
   fetchDishes: () => {
     dispatch(fetchDishes());

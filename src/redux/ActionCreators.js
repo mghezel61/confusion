@@ -2,21 +2,11 @@ import * as ActionTypes from "./ActionTypes";
 import { baseUrl } from "../shared/baseUrl";
 import axios from "axios";
 
-export const addComment = (dishId, rating, author, comment) => ({
-  type: ActionTypes.ADD_COMMENT,
-  payload: {
-    dishId: dishId,
-    rating: rating,
-    author: author,
-    comment: comment,
-  },
-});
-
 // fetch dishes
 export const fetchDishes = () => (dispatch) => {
   dispatch(dishesLoading(true));
   return axios
-    .get(`${baseUrl}disheEs`)
+    .get(`${baseUrl}dishes`)
     .then((res) => {
       const dishes = res.data;
       dispatch(addDishes(dishes));
@@ -53,6 +43,33 @@ export const fetchComments = () => (dispatch) => {
     });
 };
 
+export const addComment = (comment) => ({
+  type: ActionTypes.ADD_COMMENT,
+  payload: comment,
+});
+
+export const postComment = (dishId, rating, author, comment) => (dispatch) => {
+  const newComment = {
+    dishId: dishId,
+    rating: rating,
+    author: author,
+    comment: comment,
+  };
+  newComment.date = new Date().toISOString();
+  console.log("newComment", newComment);
+
+  const headers = { contentType: "application/json" };
+  return axios
+    .post(`${baseUrl}comments`, newComment, headers)
+    .then((res) => {
+      dispatch(addComment(res.data));
+    })
+    .catch((err) => {
+      console.log(err.message);
+      alert(`Your comment could not be posted\n Error message: ${err.message}`);
+    });
+};
+
 export const addComments = (comments) => ({
   type: ActionTypes.ADD_COMMENTS,
   payload: comments,
@@ -71,7 +88,6 @@ export const fetchPromos = () => (dispatch) => {
       .get(`http://localhost:3001/promotions`)
       // .get(`${baseUrl}promotions`)
       .then((res) => {
-        console.log("res", res);
         const promos = res.data;
         dispatch(addPromos(promos));
       })

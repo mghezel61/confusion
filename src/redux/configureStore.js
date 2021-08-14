@@ -1,6 +1,7 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { createForms } from "react-redux-form";
 import { DishesReducer } from "./reducers/dishesReducer";
+import { composeWithDevTools } from "redux-devtools-extension";
 import { CommentsReducer } from "./reducers/commentsReducer";
 import { LeadersReducer } from "./reducers/leadersReducer";
 import { PromotionsReducer } from "./reducers/promotionsReducer";
@@ -18,7 +19,7 @@ export const configureStore = () => {
         feedback: InitialFeedback,
       }),
     }),
-    applyMiddleware(thunk, logger)
+    composeWithDevTools(applyMiddleware(thunk, logger))
   );
   return store;
 };

@@ -9,13 +9,42 @@ import {
   BreadcrumbItem,
 } from "reactstrap";
 import { Link } from "react-router-dom";
-import RenderComments from "./RenderComments";
+import CommentForm from "./CommentForm";
 import { Spinner } from "./Spinner";
 import { baseUrl } from "../shared/baseUrl";
 
 const DishDetail = (props) => {
-  console.log("props", props);
-  const { dish } = props;
+  const { dish, commentsErrMess } = props;
+
+  // render comments
+  const RenderComments = (props) => {
+    const { comments, postComment, dishId, commentsErrMess } = props;
+    if (commentsErrMess)
+      return (
+        <div className="col-12 col-md-5 m-1">
+          <h4>{commentsErrMess}</h4>
+        </div>
+      );
+    return (
+      <div className="col-12 col-md-5 m-1">
+        <h2>Comments</h2>
+        {comments.map((comment) => (
+          <li className="list-unstyled" key={comment.id}>
+            <CardText className="my-4">{comment.comment}</CardText>
+            <CardText>
+              -- {comment.author}, &nbsp;
+              {new Intl.DateTimeFormat("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "2-digit",
+              }).format(new Date(comment.date))}
+            </CardText>
+          </li>
+        ))}
+        <CommentForm dishId={dishId} postComment={postComment} />
+      </div>
+    );
+  };
 
   // render dish
   const RenderDish = ({ dish }) => {
@@ -70,10 +99,9 @@ const DishDetail = (props) => {
           <RenderDish dish={dish} />
           <RenderComments
             comments={props.comments}
-            addComment={props.addComment}
+            postComment={props.postComment}
             dishId={dish.id}
-            commentsLoading={props.commentsLoading}
-            commentsErrMess={props.commentsErrMess}
+            commentsErrMess={commentsErrMess}
           />
         </div>
       </div>

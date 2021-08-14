@@ -12,7 +12,7 @@ import {
 } from "reactstrap";
 import { Control, LocalForm, Errors } from "react-redux-form";
 
-const CommentForm = ({ dishId, addComment }) => {
+const CommentForm = ({ dishId, postComment }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -20,7 +20,8 @@ const CommentForm = ({ dishId, addComment }) => {
 
   //   submit handler
   const onSubmitHandler = (values) => {
-    addComment(dishId, values.rating, values.author, values.comment);
+    toggleModal();
+    postComment(dishId, values.rating, values.author, values.comment);
   };
 
   //   Validation functions
