@@ -20,6 +20,8 @@ import Menu from "./Menu";
 
 const Main = (props) => {
   const { promotions, leaders, comments } = props;
+  console.log("comments", comments);
+  console.log("leaders", leaders);
 
   useEffect(() => {
     props.fetchDishes();
@@ -51,10 +53,12 @@ const Main = (props) => {
         <DishDetail
           dish={props.dishes.dishes.filter((dish) => dish.id === dishId)[0]}
           isLoading={props.dishes.isLoading}
-          ErrorMess={props.dishes.errMess}
+          errMess={props.dishes.errMess}
           comments={comments.comments.filter(
             (comment) => comment.dishId === dishId
           )}
+          commentsLoading={comments.isLoading}
+          commentsErrMess={comments.errMess}
           addComment={props.addComment}
         />
       );

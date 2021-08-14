@@ -9,33 +9,14 @@ import {
   BreadcrumbItem,
 } from "reactstrap";
 import { Link } from "react-router-dom";
-import CommentForm from "./CommentForm";
+import RenderComments from "./RenderComments";
 import { Spinner } from "./Spinner";
 import { baseUrl } from "../shared/baseUrl";
 
 const DishDetail = (props) => {
-  const { dish, comments } = props;
+  console.log("props", props);
+  const { dish } = props;
 
-  // render comments
-  const RenderComments = ({ comments, addComment, dishId }) => (
-    <div className="col-12 col-md-5 m-1">
-      <h2>Comments</h2>
-      {comments.map((comment) => (
-        <li className="list-unstyled" key={comment.id}>
-          <CardText className="my-4">{comment.comment}</CardText>
-          <CardText>
-            -- {comment.author}, &nbsp;
-            {new Intl.DateTimeFormat("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "2-digit",
-            }).format(new Date(comment.date))}
-          </CardText>
-        </li>
-      ))}
-      <CommentForm dishId={dishId} addComment={addComment} />
-    </div>
-  );
   // render dish
   const RenderDish = ({ dish }) => {
     return (
@@ -52,8 +33,8 @@ const DishDetail = (props) => {
       </>
     );
   };
-  // Render the the dish details
 
+  // Render the the dish details
   if (props.isLoading) {
     return (
       <div className="col-12">
@@ -63,7 +44,7 @@ const DishDetail = (props) => {
       </div>
     );
   }
-  if (props.errorMess) {
+  if (props.errMess) {
     return (
       <div className="col-12">
         <div className="row">
@@ -88,9 +69,11 @@ const DishDetail = (props) => {
         <div className="row">
           <RenderDish dish={dish} />
           <RenderComments
-            comments={comments}
+            comments={props.comments}
             addComment={props.addComment}
             dishId={dish.id}
+            commentsLoading={props.commentsLoading}
+            commentsErrMess={props.commentsErrMess}
           />
         </div>
       </div>

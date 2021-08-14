@@ -16,7 +16,7 @@ export const addComment = (dishId, rating, author, comment) => ({
 export const fetchDishes = () => (dispatch) => {
   dispatch(dishesLoading(true));
   return axios
-    .get(`${baseUrl}dishes`)
+    .get(`${baseUrl}disheEs`)
     .then((res) => {
       const dishes = res.data;
       dispatch(addDishes(dishes));
