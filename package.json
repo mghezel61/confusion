@@ -14,6 +14,7 @@
     "react-poper": "^1.0.0",
     "react-redux": "5.0.7",
     "react-redux-form": "1.16.8",
+    "react-reveal": "^1.2.2",
     "react-router-dom": "4.2.2",
     "react-scripts": "4.0.3",
     "reactstrap": "5.0.0",

@@ -17,6 +17,7 @@ import Footer from "./Footer";
 import Header from "./Header";
 import Home from "./Home";
 import Menu from "./Menu";
+import { Slide } from "react-reveal";
 
 const Main = (props) => {
   const { promotions, leaders } = props;
@@ -62,10 +63,11 @@ const Main = (props) => {
       );
     }
   };
+
   return (
     <>
       <Header />
-      <div className="container">
+      <Slide key={props.location.key} left timeout={500}>
         <Switch>
           <Route path="/home" component={HomePage} />
           <Route
@@ -89,7 +91,7 @@ const Main = (props) => {
           />
           <Redirect to="/home" />
         </Switch>
-      </div>
+      </Slide>
       <Footer />
     </>
   );

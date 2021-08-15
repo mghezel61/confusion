@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import CommentForm from "./CommentForm";
 import { Spinner } from "./Spinner";
 import { baseUrl } from "../shared/baseUrl";
+import { Flip, Zoom } from "react-reveal";
 
 const DishDetail = (props) => {
   const { dish, commentsErrMess } = props;
@@ -26,30 +27,32 @@ const DishDetail = (props) => {
         </div>
       );
     return (
-      <div className="col-12 col-md-5 m-1">
-        <h2>Comments</h2>
-        {comments.map((comment) => (
-          <li className="list-unstyled" key={comment.id}>
-            <CardText className="my-4">{comment.comment}</CardText>
-            <CardText>
-              -- {comment.author}, &nbsp;
-              {new Intl.DateTimeFormat("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "2-digit",
-              }).format(new Date(comment.date))}
-            </CardText>
-          </li>
-        ))}
-        <CommentForm dishId={dishId} postComment={postComment} />
-      </div>
+      <Zoom>
+        <div className="col-12 col-md-5 m-1">
+          <h2>Comments</h2>
+          {comments.map((comment) => (
+            <li className="list-unstyled" key={comment.id}>
+              <CardText className="my-4">{comment.comment}</CardText>
+              <CardText>
+                -- {comment.author}, &nbsp;
+                {new Intl.DateTimeFormat("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "2-digit",
+                }).format(new Date(comment.date))}
+              </CardText>
+            </li>
+          ))}
+          <CommentForm dishId={dishId} postComment={postComment} />
+        </div>
+      </Zoom>
     );
   };
 
   // render dish
   const RenderDish = ({ dish }) => {
     return (
-      <>
+      <Zoom>
         <div className=" col-12 col-md-6 mb-3">
           <Card>
             <CardImg width="100%" src={baseUrl + dish.image} alt={dish.name} />
@@ -59,7 +62,7 @@ const DishDetail = (props) => {
             </CardBody>
           </Card>
         </div>
-      </>
+      </Zoom>
     );
   };
 
@@ -84,27 +87,29 @@ const DishDetail = (props) => {
   }
   if (dish !== null) {
     return (
-      <div className="container">
-        <div className="row">
-          <Breadcrumb>
-            <BreadcrumbItem>
-              <Link to="/menu">Menu</Link>
-            </BreadcrumbItem>
-            <BreadcrumbItem active>{dish.name}</BreadcrumbItem>
-          </Breadcrumb>
+      <>
+        <div className="container">
+          <div className="row">
+            <Breadcrumb>
+              <BreadcrumbItem>
+                <Link to="/menu">Menu</Link>
+              </BreadcrumbItem>
+              <BreadcrumbItem active>{dish.name}</BreadcrumbItem>
+            </Breadcrumb>
+          </div>
+          <h3>{dish.name}</h3>
+          <hr />
+          <div className="row">
+            <RenderDish dish={dish} />
+            <RenderComments
+              comments={props.comments}
+              postComment={props.postComment}
+              dishId={dish.id}
+              commentsErrMess={commentsErrMess}
+            />
+          </div>
         </div>
-        <h3>{dish.name}</h3>
-        <hr />
-        <div className="row">
-          <RenderDish dish={dish} />
-          <RenderComments
-            comments={props.comments}
-            postComment={props.postComment}
-            dishId={dish.id}
-            commentsErrMess={commentsErrMess}
-          />
-        </div>
-      </div>
+      </>
     );
   } else {
     return <div></div>;

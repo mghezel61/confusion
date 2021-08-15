@@ -1,4 +1,5 @@
 import React from "react";
+import { Fade } from "react-reveal";
 import {
   Card,
   CardImg,
@@ -29,16 +30,18 @@ const RenderCard = ({ item, isLoading, errMess }) => {
     );
   } else
     return (
-      <Card>
-        <CardImg src={baseUrl + item.image} alt={item.name} />
-        <CardBody>
-          <CardTitle>{item.name}</CardTitle>
-          {item.designation ? (
-            <CardSubtitle>{item.designation}</CardSubtitle>
-          ) : null}
-          <CardText>{item.description}</CardText>
-        </CardBody>
-      </Card>
+      <Fade top>
+        <Card>
+          <CardImg src={baseUrl + item.image} alt={item.name} />
+          <CardBody>
+            <CardTitle>{item.name}</CardTitle>
+            {item.designation ? (
+              <CardSubtitle>{item.designation}</CardSubtitle>
+            ) : null}
+            <CardText>{item.description}</CardText>
+          </CardBody>
+        </Card>
+      </Fade>
     );
 };
 const Home = ({

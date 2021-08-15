@@ -10,6 +10,7 @@ import {
 import { Link } from "react-router-dom";
 import { baseUrl } from "../shared/baseUrl";
 import { Spinner } from "./Spinner";
+import { Zoom } from "react-reveal";
 
 function About({ leaders }) {
   // render leader
@@ -34,7 +35,11 @@ function About({ leaders }) {
     <div>{leaders.errMess}</div>
   ) : (
     leaders.leaders.map((leader) => {
-      return <RenderLeader key={leader.id} leader={leader} />;
+      return (
+        <Zoom>
+          <RenderLeader key={leader.id} leader={leader} />;
+        </Zoom>
+      );
     })
   );
 

@@ -8,6 +8,7 @@ import { PromotionsReducer } from "./reducers/promotionsReducer";
 import thunk from "redux-thunk";
 import logger from "redux-logger";
 import { InitialFeedback } from "./forms";
+import { FeedbacksReducer } from "./reducers/feedbacksReducer";
 export const configureStore = () => {
   const store = createStore(
     combineReducers({
@@ -15,6 +16,7 @@ export const configureStore = () => {
       comments: CommentsReducer,
       promotions: PromotionsReducer,
       leaders: LeadersReducer,
+      feedbacks: FeedbacksReducer,
       ...createForms({
         feedback: InitialFeedback,
       }),

@@ -9,6 +9,7 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Spinner } from "./Spinner";
+import { Fade } from "react-reveal";
 import { baseUrl } from "../shared/baseUrl";
 
 const Menu = ({ dishes }) => {
@@ -57,9 +58,11 @@ const Menu = ({ dishes }) => {
       </div>
       <h3>Menu</h3>
       <hr />
-      <div className="row">
-        <RenderMenu dishes={dishes} />
-      </div>
+      <Fade bottom>
+        <div className="row">
+          <RenderMenu dishes={dishes} />
+        </div>
+      </Fade>
     </div>
   );
 };
